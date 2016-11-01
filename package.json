@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-node src/app.js",
-    "schedule": "babel-node src/schedule.js"
+    "dev": "babel-node src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +15,7 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "cron": "^1.1.1"
+    "cron": "^1.1.1",
+    "request": "^2.76.0"
   }
 }

@@ -1,8 +1,6 @@
-import http from 'http';
+import scheduler from './scheduler';
 
-http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello world');
-}).listen(3001, '127.0.0.1');
+// cron job scheduler
+scheduler();
 
-console.log('Server is running...');
+// action cable
