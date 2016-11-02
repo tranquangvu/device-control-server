@@ -1,14 +1,14 @@
 import { CronJob } from 'cron';
-import storeValues from './jobs/storeValues'
+import store from './jobs/store'
 
 export default function scheduler() {
-  const storeValuseJob = new CronJob({
-    cronTime: '0 */1 * * * *',
+  const storeJob = new CronJob({
+    cronTime: '0 */10 * * * *',
     onTick: () => {
-      storeValues();
+      store();
     },
     start: false
   });
   
-  storeValuseJob.start();
+  storeJob.start();
 }
