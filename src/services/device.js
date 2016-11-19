@@ -1,6 +1,10 @@
 import env from '../env';
 import request from 'request';
 
+function randomBetween(start, end) {
+  return Math.floor(Math.random() * (end - start)) + start;
+}
+
 export function getDevices() {
   return new Promise((resolve, reject) => {
     let options = {
@@ -17,7 +21,7 @@ export function getDevices() {
       }
 
       body = JSON.parse(body);
-      return body.status === 'success' ? resolve(body.data) : reject(body.data);
+      return body.success ? resolve(body.data) : reject(body.data);
     });
   });
 }
@@ -30,6 +34,12 @@ export function getValueOfDevice(device) {
     //   }
     //   resolve({...JSON.parse(body), device_id: device.id});
     // });
-    resolve({temp: 28, air_humid: 60.5, soil_humid: 70.5, brightness: 100, device_id: device.id});
+    resolve({
+      temperature: randomBetween(20, 40),
+      humidity: randomBetween(50, 80),
+      soil_moisture: randomBetween(50, 80),
+      light: randomBetween(2000, 3000),
+      device_id: device.id
+    });
   });
 }

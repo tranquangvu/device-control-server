@@ -18,7 +18,7 @@ socket.on('get_current_value', (data) => {
 
   getValueOfDevice(device)
     .then((values) => {
-      socket.emit('response_current_value', values);
+      socket.emit('ls_response_current_value', values);
     })
     .catch((error) => {
       console.log(error);
