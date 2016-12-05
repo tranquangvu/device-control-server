@@ -11,6 +11,7 @@ const socket = io('http://0.0.0.0:5001');
 
 socket.on('connect', () => {
   console.log('-> Connected');
+  socket.emit('ls_response_connect', {ls: true});
 });
 
 socket.on('get_current_value', (data) => {
