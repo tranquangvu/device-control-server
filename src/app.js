@@ -1,6 +1,13 @@
 import scheduler from './scheduler';
 import io from 'socket.io-client';
-import { getValueOfDevice } from './services/device';
+import request from 'request';
+import {
+  turnOnLed,
+  turnOffLed,
+  turnOnServo,
+  turnOffServo,
+  getValueOfDevice,
+} from './services/device';
 
 // cron job scheduler
 // scheduler();
@@ -24,6 +31,54 @@ socket.on('get_current_value', (data) => {
     .catch((error) => {
       console.log(error);
     });
+});
+
+socket.on('turn_on_led', (data) => {
+  let { device } = data
+
+  turnOnLed(device)
+    .then((result) => {
+      socket.emit('ls_response_device_status', result);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+});
+
+socket.on('turn_off_led', (data) => {
+  let { device } = data
+
+  turnOffLed(device)
+    .then((result) => {
+      socket.emit('ls_response_device_status', result);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+});
+
+socket.on('turn_on_servo', (data) => {
+  let { device } = data
+
+  turnOnServo(device)
+    .then((result) => {
+      socket.emit('ls_response_device_status', result);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+});
+
+socket.on('turn_off_servo', (data) => {
+  let { device } = data
+
+  turnOffServo(device)
+    .then((result) => {
+      socket.emit('ls_response_device_status', result);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
 });
 
 socket.on('disconnect', () => {

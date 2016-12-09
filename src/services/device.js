@@ -28,18 +28,55 @@ export function getDevices() {
 
 export function getValueOfDevice(device) {
   return new Promise((resolve, reject) => {
-    // request.get(`http://${device.ip}/getAllValue`, (error, response, body) => {
-    //   if(error || response.statusCode != 200) {
-    //     reject(error);
-    //   }
-    //   resolve({...JSON.parse(body), device_id: device.id});
-    // });
-    resolve({
-      temperature: randomBetween(20, 40),
-      humidity: randomBetween(50, 80),
-      soil_moisture: randomBetween(50, 80),
-      light: randomBetween(2000, 3000),
-      device_id: device.id
+    request.get(`http://${device.ip}/getAllValue`, (error, response, body) => {
+      if(error || response.statusCode != 200) {
+        reject(error);
+      }
+      resolve(Object.assign(JSON.parse(body), {device_id: device.id}));
+    });
+  });
+}
+
+export function turnOnLed(device) {
+  return new Promise((resolve, reject) => {
+    request.get(`http://${device.ip}/?led=on`, (error, response, body) => {
+      if(error || response.statusCode != 200) {
+        reject(error);
+      }
+      resolve(Object.assign(JSON.parse(body), {device_id: device.id}));
+    });
+  });
+}
+
+export function turnOffLed(device) {
+  return new Promise((resolve, reject) => {
+    request.get(`http://${device.ip}/?led=off`, (error, response, body) => {
+      if(error || response.statusCode != 200) {
+        reject(error);
+      }
+      resolve(Object.assign(JSON.parse(body), {device_id: device.id}));
+    });
+  });
+}
+
+export function turnOnServo(device) {
+  return new Promise((resolve, reject) => {
+    request.get(`http://${device.ip}/?servo=on`, (error, response, body) => {
+      if(error || response.statusCode != 200) {
+        reject(error);
+      }
+      resolve(Object.assign(JSON.parse(body), {device_id: device.id}));
+    });
+  });
+}
+
+export function turnOffServo(device) {
+  return new Promise((resolve, reject) => {
+    request.get(`http://${device.ip}/?servo=off`, (error, response, body) => {
+      if(error || response.statusCode != 200) {
+        reject(error);
+      }
+      resolve(Object.assign(JSON.parse(body), {device_id: device.id}));
     });
   });
 }
